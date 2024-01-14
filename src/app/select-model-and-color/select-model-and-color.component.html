@@ -1,8 +1,8 @@
 <div class="container">
   <h1>Step 1: Choose your Model and Color</h1>
-  <div class="row align-items-center">
+  <div class="row">
     <div *ngIf="models$ | async as models" class="col">
-      <label class="col-form-label">Model:</label>
+      <label>Model:</label>
       <select (change)="modelSelected()" [(ngModel)]="selectedModel">
         <option [ngValue]="null" selected value>Choose...</option>
         <option *ngFor="let model of models" [ngValue]="model">
@@ -10,13 +10,20 @@
         </option>
       </select>
     </div>
-    <div *ngIf="selectedModel && true" class="col">
-      <label class="col-form-label">Color:</label>
-      <select [(ngModel)]="selectedColor" class="form-control">
-        <option *ngFor="let color of colors" [ngValue]="selectedColor || color">
+    <div *ngIf="selectedModel && colors" class="col">
+      <label>Color:</label>{{selectedColor.code}}
+      <select (change)="colorSelected()" [(ngModel)]="selectedColor" class="form-control">
+        <option *ngFor="let color of colors" [ngValue]="color">
           {{color.description}}
         </option>
       </select>
     </div>
   </div>
+
+  <div class="row">
+    <div class="container-image">
+      <img [src]="imageUrl">
+    </div>
+  </div>
+
 </div>
