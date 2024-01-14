@@ -1,4 +1,5 @@
 .main {
+  --nav-bg-color: #2a2929;
   .content {
     nav {
       display: flex;
@@ -6,19 +7,20 @@
       border: 0;
 
       a {
+        color: white;
         flex-grow: 1;
         text-align: center;
 
         &:hover {
           opacity: 0.6;
           transition: 0.3s;
+          background: var(--nav-bg-color);
         }
         &:visited {
           dislpay: block;
         }
         &.active {
-          color: yellow;
-          background: var(--nav-link-color);
+          background: var(--nav-bg-color);
         }
       }
     }

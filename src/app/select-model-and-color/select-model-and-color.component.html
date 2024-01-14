@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Step 1: Choose your Model and Color</h1>
+  <div class="row align-items-center">
+    <div class="col">
+      <label class="col-form-label">Model:</label>
+      <input type="text" placeholder="Choose..." [formControl]="inputModel" class="form-control">
+    </div>
+    <div class="col" *ngIf="inputModel?.value">
+      <label class="col-form-label">Color:</label>
+      <input type="text" placeholder="Choose..." [formControl]="inputColor" class="form-control">
+    </div>
+  </div>
+</div>

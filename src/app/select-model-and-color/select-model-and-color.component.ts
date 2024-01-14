@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-select-model-and-color',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './select-model-and-color.component.scss'
 })
 export class SelectModelAndColorComponent {
+
+
+  public inputModel: (FormControl) = new FormControl();
+  public inputColor: (FormControl) = new FormControl();
 
 }
