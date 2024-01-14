@@ -1,5 +1,6 @@
 .main {
   --nav-bg-color: #2a2929;
+
   .content {
     nav {
       display: flex;
@@ -16,9 +17,7 @@
           transition: 0.3s;
           background: var(--nav-bg-color);
         }
-        &:visited {
-          dislpay: block;
-        }
+
         &.active {
           background: var(--nav-bg-color);
         }
