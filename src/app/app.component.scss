@@ -1,0 +1,26 @@
+.main {
+  .content {
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      border: 0;
+
+      a {
+        flex-grow: 1;
+        text-align: center;
+
+        &:hover {
+          opacity: 0.6;
+          transition: 0.3s;
+        }
+        &:visited {
+          dislpay: block;
+        }
+        &.active {
+          color: yellow;
+          background: var(--nav-link-color);
+        }
+      }
+    }
+  }
+}
