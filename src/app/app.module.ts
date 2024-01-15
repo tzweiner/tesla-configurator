@@ -11,6 +11,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderByPipe } from './order-by.pipe';
+import { DisplayCarImageComponent } from './display-car-image/display-car-image.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { OrderByPipe } from './order-by.pipe';
     SelectModelAndColorComponent,
     SelectConfigAndOptionsComponent,
     SummaryComponent,
+    DisplayCarImageComponent,
   ],
   imports: [
     CommonModule,

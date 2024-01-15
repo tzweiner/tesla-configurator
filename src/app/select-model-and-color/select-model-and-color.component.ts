@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Observable } from 'rxjs';
 import { CarModel, Color } from '../models/car-model.model';
-import { ModelColorPairSelectedModel } from '../models/model-color-pair-selected.model';
 
 @Component({
   selector: 'app-select-model-and-color',
@@ -14,7 +13,6 @@ export class SelectModelAndColorComponent implements OnInit {
   public colors: Color[] = [];
   public selectedModel: CarModel | null = null;
   public selectedColor: Color;
-  public imageUrl: string;
 
   constructor(private service: DataService) {}
 
@@ -24,7 +22,7 @@ export class SelectModelAndColorComponent implements OnInit {
 
   public modelSelected(): void {
     if (!this.selectedModel) {
-      this.service.clearModelColorPairSelection();
+      this.service.clearSelections();
       this.colors = [];
       return;
     }
@@ -34,22 +32,10 @@ export class SelectModelAndColorComponent implements OnInit {
   }
 
   public colorSelected(): void {
-    this.imageUrl = this.getCarImage();
-    this.service.setModelColorPairSelection(
-      this.selectedModel ? this.selectedModel.code : '',
-      this.selectedColor ? this.selectedColor.code : '',
+    this.service.setModelAndColorSelection(
+      this.selectedModel ?? undefined,
+      this.selectedColor ?? undefined,
     );
-  }
-
-  public getCarImage(): string {
-    if (!this.selectedColor || !this.selectedModel) {
-      return '';
-    }
-    const image: ModelColorPairSelectedModel = {
-      modelCode: this.selectedModel.code,
-      colorCode: this.selectedColor.code,
-    };
-    return this.service.getCarImage(image);
   }
 
   private compareModelDescriptions = (a: CarModel, b: CarModel) => {

@@ -2,8 +2,8 @@
   <div class="content">
     <nav>
       <a id="step1" routerLink="/models" routerLinkActive="active">Step 1</a>
-      <a id="step2" routerLink="{{getSelections() ? '/options/' + getSelections().modelCode : '/options/cb'}}" routerLinkActive="active">Step 2</a>
-      <a id="step3" routerLink="{{getSelections() ? '/summary/' + getSelections().modelCode : '/summary'}}" routerLinkActive="active">Step 3</a>
+      <a id="step2" routerLink="{{getUrl('options')}}" routerLinkActive="active">Step 2</a>
+      <a id="step3" routerLink="{{getUrl('summary')}}" routerLinkActive="active">Step 3</a>
     </nav>
     <router-outlet></router-outlet>
   </div>

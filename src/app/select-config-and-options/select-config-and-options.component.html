@@ -1,6 +1,6 @@
 <div *ngIf="data$ | async as data; else nodata" class="container">
-  <h1>Step 2: Select Config and Options</h1>
-  <div class="row">
+  <h1>Step 2: Select you config and options</h1>
+  <div>
     <label>Config:</label>
     <select (change)="configSelected()" [(ngModel)]="selectedConfig" id="modelSelect">
       <option [ngValue]="null" selected value>Choose...</option>
@@ -9,13 +9,18 @@
       </option>
     </select>
   </div>
-  <div class="row">
-    <label>Tow Hitch?</label>
-    <input [formControl]="checkboxHitch" id="includeTow" type="checkbox">
+  <div *ngIf="!!selectedConfig">
+    <p>Range: {{selectedConfig.range}} miles - Max speed: {{selectedConfig.speed}} - Cost: {{selectedConfig.price | currency: 'USD' }}</p>
   </div>
-  <div class="row">
+  <div>
+    <label>Tow Hitch?</label>
+    <input (change)="towSelected()" [formControl]="checkboxTow" id="includeTow" type="checkbox">
+  </div>
+  <div>
     <label>Yoke Steering Wheel?</label>
-    <input [formControl]="checkboxWheel" id="includeYoke" type="checkbox">
+    <input (change)="wheelSelected()" [formControl]="checkboxWheel" id="includeYoke" type="checkbox">
   </div>
 </div>
+<app-display-car-image></app-display-car-image>
 <ng-template #nodata>No data to show.</ng-template>
+
