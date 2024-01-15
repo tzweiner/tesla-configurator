@@ -1,8 +1,13 @@
-<div class="container">
+<div *ngIf="data$ | async as data; else nodata" class="container">
   <h1>Step 2: Select Config and Options</h1>
   <div class="row">
-    <label class="col-form-label">Config:</label><!-- id="configSelect" -->
-    <input [formControl]="inputConfig" placeholder="Choose..." type="text">
+    <label>Config:</label>
+    <select (change)="configSelected()" [(ngModel)]="selectedConfig" id="modelSelect">
+      <option [ngValue]="null" selected value>Choose...</option>
+      <option *ngFor="let config of data.configs" [ngValue]="config">
+        {{config.description}}
+      </option>
+    </select>
   </div>
   <div class="row">
     <label>Tow Hitch?</label>
@@ -13,3 +18,4 @@
     <input [formControl]="checkboxWheel" id="includeYoke" type="checkbox">
   </div>
 </div>
+<ng-template #nodata>No data to show.</ng-template>

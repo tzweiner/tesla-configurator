@@ -1,8 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CarModel } from '../models/car-model.model';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { ModelColorPairSelectedModel } from '../models/model-color-pair-selected.model';
+import { OptionsModel } from '../models/options-model.model';
+import { ActivatedRouteSnapshot } from '@angular/router';
+
+export const summaryResolver: (
+  route: ActivatedRouteSnapshot,
+) => Observable<OptionsModel> = (route: ActivatedRouteSnapshot) => {
+  console.log('route.paramMap', route.paramMap.get('modelCode'));
+  return inject(DataService).getOptions(route?.paramMap?.get('modelCode'));
+};
 
 @Injectable()
 export class DataService {
@@ -10,6 +19,15 @@ export class DataService {
   private modelColorPairSelection: ModelColorPairSelectedModel;
 
   constructor(private http$: HttpClient) {}
+
+  public getOptions(
+    code?: string | null | undefined,
+  ): Observable<OptionsModel> {
+    if (!code) {
+      return EMPTY;
+    }
+    return this.http$.get<OptionsModel>('/options/' + code);
+  }
 
   public getModels(): Observable<CarModel[]> {
     return this.http$.get<CarModel[]>('/models');
@@ -27,7 +45,7 @@ export class DataService {
   }
 
   public getModelColorPairSelection(): ModelColorPairSelectedModel {
-    return this.modelColorPairSelection;
+    return this.modelColorPairSelection || null;
   }
 
   public clearModelColorPairSelection(): void {

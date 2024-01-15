@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DataService } from './services/data.service';
+import { ModelColorPairSelectedModel } from './models/model-color-pair-selected.model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   name = 'Angular';
+
+  constructor(private service: DataService) {}
+
+  public getSelections(): ModelColorPairSelectedModel {
+    return this.service.getModelColorPairSelection() || null;
+  }
 }
