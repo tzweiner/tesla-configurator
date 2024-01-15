@@ -1,15 +1,15 @@
 <div class="container">
   <h1>Step 2: Select Config and Options</h1>
   <div class="row">
-    <label class="col-form-label">Config:</label>
-    <input type="text" placeholder="Choose..." [formControl]="inputConfig">
+    <label class="col-form-label">Config:</label><!-- id="configSelect" -->
+    <input [formControl]="inputConfig" placeholder="Choose..." type="text">
   </div>
   <div class="row">
     <label>Tow Hitch?</label>
-    <input type="checkbox" [formControl]="checkboxHitch">
+    <input [formControl]="checkboxHitch" id="includeTow" type="checkbox">
   </div>
   <div class="row">
     <label>Yoke Steering Wheel?</label>
-    <input type="checkbox" [formControl]="checkboxWheel">
+    <input [formControl]="checkboxWheel" id="includeYoke" type="checkbox">
   </div>
 </div>

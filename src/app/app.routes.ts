@@ -3,11 +3,19 @@ import { NgModule } from '@angular/core';
 import { SelectModelAndColorComponent } from './select-model-and-color/select-model-and-color.component';
 import { SelectConfigAndOptionsComponent } from './select-config-and-options/select-config-and-options.component';
 import { SummaryComponent } from './summary/summary.component';
+import { canActivateStep2Guard } from './guards/model-color.guard';
 
 export const routes: Routes = [
-  { path: 'models', component: SelectModelAndColorComponent },
-  { path: 'options/:modelCode', component: SelectConfigAndOptionsComponent },
-  { path: 'step3', component: SummaryComponent },
+  {
+    path: 'models',
+    component: SelectModelAndColorComponent,
+  },
+  {
+    path: 'options:modelCase',
+    component: SelectConfigAndOptionsComponent,
+    canActivate: [canActivateStep2Guard],
+  },
+  { path: 'summary', component: SummaryComponent },
   { path: '**', redirectTo: 'models' },
 ];
 

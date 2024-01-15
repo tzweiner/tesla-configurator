@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Observable } from 'rxjs';
 import { CarModel, Color } from '../models/car-model.model';
-import { ImagePayloadModel } from '../models/image-payload.model';
+import { ModelColorPairSelectedModel } from '../models/model-color-pair-selected.model';
 
 @Component({
   selector: 'app-select-model-and-color',
@@ -23,6 +23,11 @@ export class SelectModelAndColorComponent implements OnInit {
   }
 
   public modelSelected(): void {
+    if (!this.selectedModel) {
+      this.service.clearModelColorPairSelection();
+      this.colors = [];
+      return;
+    }
     this.colors = this.selectedModel?.colors || [];
     this.selectedColor = this.colors?.[0] ?? null;
     this.colorSelected();
@@ -30,17 +35,20 @@ export class SelectModelAndColorComponent implements OnInit {
 
   public colorSelected(): void {
     this.imageUrl = this.getCarImage();
+    this.service.setModelColorPairSelection(
+      this.selectedModel ? this.selectedModel.code : '',
+      this.selectedColor ? this.selectedColor.code : '',
+    );
   }
 
   public getCarImage(): string {
     if (!this.selectedColor || !this.selectedModel) {
       return '';
     }
-    const image: ImagePayloadModel = {
+    const image: ModelColorPairSelectedModel = {
       modelCode: this.selectedModel.code,
       colorCode: this.selectedColor.code,
     };
-    console.log('image url', this.service.getCarImage(image));
     return this.service.getCarImage(image);
   }
 

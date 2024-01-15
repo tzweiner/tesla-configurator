@@ -1,14 +1,10 @@
-import {Component} from '@angular/core';
-import {AsyncPipe, JsonPipe} from '@angular/common';
-import {RouterModule} from "@angular/router";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  // imports: [AsyncPipe, JsonPipe, RouterModule],
   templateUrl: 'app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   name = 'Angular';
-
 }
