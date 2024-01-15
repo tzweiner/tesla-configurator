@@ -3,15 +3,15 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { DataService } from '../services/data.service';
 import { inject } from '@angular/core';
+import { DataService } from '../services/data.service';
 
-export const modelAndColorGuard: (
+export const configGuard: (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
   router: Router,
 ) => boolean = () => {
   // const selections = inject(DataService).getSelections();
-  // return !!selections?.model?.code && !!selections?.color?.code;
-  return inject(DataService).isModelColorPairSet();
+  // return !!selections?.model && !!selections?.color && !!selections?.config;
+  return inject(DataService).isConfigSet();
 };

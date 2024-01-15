@@ -7,7 +7,7 @@ import { Config, OptionsModel } from '../models/options-model.model';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { SelectionsModel } from '../models/selections.model';
 
-export const summaryResolver: (
+export const optionsResolver: (
   route: ActivatedRouteSnapshot,
 ) => Observable<OptionsModel> = (route: ActivatedRouteSnapshot) => {
   return inject(DataService).getOptions(route?.paramMap?.get('modelCode'));
@@ -75,6 +75,14 @@ export class DataService {
 
   public isModelColorPairSet(): boolean {
     return !!this.selections?.model && !!this.selections?.color;
+  }
+
+  public isConfigSet(): boolean {
+    return (
+      !!this.selections?.model &&
+      !!this.selections?.color &&
+      !!this.selections?.config
+    );
   }
 
   public triggerSelectionsSubjectEmit() {

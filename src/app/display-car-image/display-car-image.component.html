@@ -1,7 +1,6 @@
 <div *ngIf="data$ | async as data" class="row">
   <div class="container-image">
     <h1>{{data.model?.description}} in {{data.color?.description}}</h1>
-    --{{getCarImage(data?.model?.code, data?.color?.code)}}
     <img [src]="getCarImage(data?.model?.code, data?.color?.code)">
     <div class="glow-wrap">
       <i class="glow"></i>

@@ -1,0 +1,11 @@
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+  width: 70%;
+  margin: calc(1.5 * var(--universal-margin)) var(--universal-margin);
+
+  div {
+    flex: 1 1 auto;
+    margin: 10px;
+  }
+}

@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { SelectModelAndColorComponent } from './select-model-and-color/select-model-and-color.component';
 import { SelectConfigAndOptionsComponent } from './select-config-and-options/select-config-and-options.component';
 import { SummaryComponent } from './summary/summary.component';
-import { summaryResolver } from './services/data.service';
-import { canActivateStep2Guard } from './guards/model-color.guard';
+import { optionsResolver } from './services/data.service';
+import { modelAndColorGuard } from './guards/model-color.guard';
+import { configGuard } from './guards/config.guard';
 
 export const routes: Routes = [
   {
@@ -14,12 +15,13 @@ export const routes: Routes = [
   {
     path: 'options/:modelCode',
     component: SelectConfigAndOptionsComponent,
-    canActivate: [canActivateStep2Guard],
-    resolve: { selection: summaryResolver },
+    canActivate: [modelAndColorGuard],
+    resolve: { selection: optionsResolver },
   },
   {
     path: 'summary/:modelCode',
     component: SummaryComponent,
+    canActivate: [configGuard],
   },
   { path: '**', redirectTo: 'models' },
 ];
