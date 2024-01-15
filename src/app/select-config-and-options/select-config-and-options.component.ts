@@ -11,7 +11,7 @@ import { DataService } from '../services/data.service';
   styleUrl: './select-config-and-options.component.scss',
 })
 export class SelectConfigAndOptionsComponent implements OnInit {
-  public selectedConfig: Config;
+  public selectedConfig: Config | null | undefined = null;
   public checkboxTow: FormControl = new FormControl<boolean>(false);
   public checkboxWheel: FormControl = new FormControl<boolean>(false);
   public data$: Observable<OptionsModel> = new Observable<OptionsModel>();
@@ -26,14 +26,28 @@ export class SelectConfigAndOptionsComponent implements OnInit {
   }
 
   public configSelected(): void {
-    this.service.setConfigTowWheelSelection(this.selectedConfig);
+    this.checkboxTow.setValue(false);
+    this.checkboxWheel.setValue(false);
+    this.service.setConfigTowWheelSelection(
+      this.selectedConfig,
+      this.checkboxTow.value,
+      this.checkboxWheel.value,
+    );
   }
 
   public towSelected(): void {
-    this.service.setConfigTowWheelSelection(this.checkboxTow.value);
+    this.service.setConfigTowWheelSelection(
+      this.selectedConfig,
+      this.checkboxTow.value,
+      this.checkboxWheel.value,
+    );
   }
 
   public wheelSelected(): void {
-    this.service.setConfigTowWheelSelection(this.checkboxWheel.value);
+    this.service.setConfigTowWheelSelection(
+      this.selectedConfig,
+      this.checkboxTow.value,
+      this.checkboxWheel.value,
+    );
   }
 }

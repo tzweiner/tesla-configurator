@@ -55,7 +55,7 @@ export class DataService {
   }
 
   public setConfigTowWheelSelection(
-    config?: Config,
+    config?: Config | null | undefined,
     tow?: boolean,
     wheel?: boolean,
   ): void {

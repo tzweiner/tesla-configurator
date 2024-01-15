@@ -17,7 +17,9 @@ export class DisplayCarImageComponent implements OnInit {
 
   ngOnInit(): void {
     this.data$ = this.service.selections$;
-    this.service.triggerSelectionsSubjectEmit();
+    setTimeout(() => {
+      this.service.triggerSelectionsSubjectEmit();
+    }, 0);
   }
 
   public getCarImage(model?: string, color?: string): string {
