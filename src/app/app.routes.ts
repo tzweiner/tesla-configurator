@@ -1,18 +1,18 @@
 import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from "@angular/core";
-import { SelectModelAndColorComponent } from "./select-model-and-color/select-model-and-color.component";
-import { SelectConfigAndOptionsComponent } from "./select-config-and-options/select-config-and-options.component";
-import { SummaryComponent } from "./summary/summary.component";
+import { NgModule } from '@angular/core';
+import { SelectModelAndColorComponent } from './select-model-and-color/select-model-and-color.component';
+import { SelectConfigAndOptionsComponent } from './select-config-and-options/select-config-and-options.component';
+import { SummaryComponent } from './summary/summary.component';
 
 export const routes: Routes = [
-  { path: 'step1', component: SelectModelAndColorComponent },
-  { path: 'step2', component: SelectConfigAndOptionsComponent },
+  { path: 'models', component: SelectModelAndColorComponent },
+  { path: 'options/:modelCode', component: SelectConfigAndOptionsComponent },
   { path: 'step3', component: SummaryComponent },
-  { path: '**', redirectTo: 'step1' }
+  { path: '**', redirectTo: 'models' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

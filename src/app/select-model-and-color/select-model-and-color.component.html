@@ -3,7 +3,7 @@
   <div class="row">
     <div *ngIf="models$ | async as models" class="col">
       <label>Model:</label>
-      <select (change)="modelSelected()" [(ngModel)]="selectedModel">
+      <select (change)="modelSelected()" [(ngModel)]="selectedModel" id="modelSelect">
         <option [ngValue]="null" selected value>Choose...</option>
         <option *ngFor="let model of models" [ngValue]="model">
           {{model.description}}
@@ -12,7 +12,7 @@
     </div>
     <div *ngIf="selectedModel && colors" class="col">
       <label>Color:</label>{{selectedColor.code}}
-      <select (change)="colorSelected()" [(ngModel)]="selectedColor" class="form-control">
+      <select (change)="colorSelected()" [(ngModel)]="selectedColor" class="form-control" id="colorSelect">
         <option *ngFor="let color of colors" [ngValue]="color">
           {{color.description}}
         </option>
@@ -20,9 +20,13 @@
     </div>
   </div>
 
-  <div class="row">
+  <div *ngIf="selectedModel && selectedColor" class="row">
     <div class="container-image">
+      <h1>{{selectedModel.description}} - {{selectedColor.description}}</h1>
       <img [src]="imageUrl">
+      <div class="glow-wrap">
+        <i class="glow"></i>
+      </div>
     </div>
   </div>
 
