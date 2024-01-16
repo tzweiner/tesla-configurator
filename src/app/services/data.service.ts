@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CarModel, Color } from '../models/car-model.model';
-import { EMPTY, Observable, Subject } from 'rxjs';
-import { ModelColorPairSelectedModel } from '../models/model-color-pair-selected.model';
+import { EMPTY, Observable, ReplaySubject } from 'rxjs';
 import { Config, OptionsModel } from '../models/options-model.model';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { SelectionsModel } from '../models/selections.model';
@@ -15,8 +14,8 @@ export const optionsResolver: (
 
 @Injectable()
 export class DataService {
-  private selectionsSubject: Subject<SelectionsModel> =
-    new Subject<SelectionsModel>();
+  private selectionsSubject: ReplaySubject<SelectionsModel> =
+    new ReplaySubject<SelectionsModel>();
   public selections$ = this.selectionsSubject.asObservable();
   private imagesUrl = 'https://interstate21.com/tesla-app/images/';
   private selections: SelectionsModel = {};
@@ -36,8 +35,8 @@ export class DataService {
     return this.http$.get<CarModel[]>('/models');
   }
 
-  public getCarImage(imagePayload: ModelColorPairSelectedModel): string {
-    return `${this.imagesUrl}/${imagePayload.modelCode}/${imagePayload.colorCode}.jpg`;
+  public getCarImage(): string {
+    return `${this.imagesUrl}/${this.selections?.model?.code}/${this.selections.color?.code}.jpg`;
   }
 
   public setModelAndColorSelection(model?: CarModel, color?: Color): void {

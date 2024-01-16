@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { ModelColorPairSelectedModel } from '../models/model-color-pair-selected.model';
 import { Observable } from 'rxjs';
 import { SelectionsModel } from '../models/selections.model';
 
@@ -22,14 +21,7 @@ export class DisplayCarImageComponent implements OnInit {
     }, 0);
   }
 
-  public getCarImage(model?: string, color?: string): string {
-    if (!model || !color) {
-      return '';
-    }
-    const image: ModelColorPairSelectedModel = {
-      modelCode: model,
-      colorCode: color,
-    };
-    return this.service.getCarImage(image);
+  public getCarImage(): string {
+    return this.service.getCarImage();
   }
 }
