@@ -1,8 +1,10 @@
-<div *ngIf="data$ | async as data" class="row">
-  <div class="container-image">
-    <img [src]="getCarImage()">
-    <div class="glow-wrap">
-      <i class="glow"></i>
+<ng-container *ngIf="showImage()">
+    <div *ngIf="data$ | async as data" class="row">
+        <div class="container-image">
+            <img [src]="getCarImage()">
+            <div class="glow-wrap">
+                <i class="glow"></i>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+</ng-container>

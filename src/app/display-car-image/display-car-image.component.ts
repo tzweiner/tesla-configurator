@@ -21,7 +21,14 @@ export class DisplayCarImageComponent implements OnInit {
     }, 0);
   }
 
+  public showImage(): boolean {
+    return this.service.isModelColorPairSet();
+  }
+
   public getCarImage(): string {
-    return this.service.getCarImage();
+    if (this.service.isModelColorPairSet()) {
+      return this.service.getCarImage();
+    }
+    return '';
   }
 }
