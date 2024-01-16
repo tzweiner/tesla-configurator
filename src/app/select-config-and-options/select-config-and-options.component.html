@@ -3,14 +3,14 @@
   <div>
     <label>Config:</label>
     <select (change)="configSelected()" [(ngModel)]="selectedConfig" id="configSelect">
-      <option [selected]="!selectedConfig" value="null">Choose...</option>
-      <option *ngFor="let config of data.configs" [ngValue]="config" [selected]="config.id == selectedConfig?.id">
+      <option [ngValue]="null">Choose...</option>
+      <option *ngFor="let config of data.configs" [ngValue]="config" >
         {{config.description}}
       </option>
     </select>
   </div>
   <div *ngIf="!!selectedConfig">
-    <p>Range: {{selectedConfig.range}} miles - Max speed: {{selectedConfig.speed}} - Cost: {{selectedConfig.price | currency: 'USD' }}</p>
+    <p>Range: {{selectedConfig?.range}} miles - Max speed: {{selectedConfig?.speed}} - Cost: {{selectedConfig?.price | currency: 'USD' }}</p>
   </div>
   <div *ngIf="data.towHitch">
     <label>Tow Hitch?</label>

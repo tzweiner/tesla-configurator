@@ -33,6 +33,7 @@ export class SelectConfigAndOptionsComponent implements OnInit {
   }
 
   public configSelected(): void {
+    console.log('config is ', this.selectedConfig);
     this.checkboxTow.setValue(false);
     this.checkboxWheel.setValue(false);
     this.service.setConfigTowWheelSelection(

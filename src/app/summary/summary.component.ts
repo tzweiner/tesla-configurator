@@ -25,20 +25,12 @@ export class SummaryComponent implements OnInit {
     return !!this.data.color?.price;
   }
 
-  public showTowPrice(): boolean {
-    return !!this.data.tow;
-  }
-
-  public showWheelPrice(): boolean {
-    return !!this.data.wheel;
-  }
-
   public getTotalCost(): number {
     return (
       (this.data.config?.price ?? 0) +
       (this.data.color?.price ?? 0) +
-      (this.showTowPrice() ? AppSettings.DEFAULT_TOWHITCH_PRICE : 0) +
-      (this.showWheelPrice() ? AppSettings.DEFAULT_WHEEL_PRICE : 0)
+      (this.data.tow ? AppSettings.DEFAULT_TOWHITCH_PRICE : 0) +
+      (this.data.wheel ? AppSettings.DEFAULT_WHEEL_PRICE : 0)
     );
   }
 

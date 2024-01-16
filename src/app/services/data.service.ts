@@ -89,12 +89,16 @@ export class DataService {
     this.triggerSelectionsSubjectEmit();
   }
 
-  public clearTowhitchAndWheelSelections(): void {
+  public clearCofigAndTowhitchAndWheelSelections(): void {
+    if (this.selections?.config) {
+      this.selections.config = null;
+    }
     if (this.selections?.tow) {
       this.selections.tow = undefined;
     }
     if (this.selections?.wheel) {
       this.selections.wheel = undefined;
     }
+    this.triggerSelectionsSubjectEmit();
   }
 }
