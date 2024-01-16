@@ -3,8 +3,8 @@
   <div>
     <label>Config:</label>
     <select (change)="configSelected()" [(ngModel)]="selectedConfig" id="modelSelect">
-      <option [ngValue]="null" selected value>Choose...</option>
-      <option *ngFor="let config of data.configs" [ngValue]="config">
+      <option [selected]="!selectedConfig" value="null">Choose...</option>
+      <option *ngFor="let config of data.configs" [ngValue]="config" [selected]="config.id == selectedConfig?.id">
         {{config.description}}
       </option>
     </select>
