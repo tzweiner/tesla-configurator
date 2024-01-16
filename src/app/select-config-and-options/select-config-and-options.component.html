@@ -1,15 +1,26 @@
-<div class="container">
-  <h1>Step 2: Select Config and Options</h1>
-  <div class="row">
-    <label class="col-form-label">Config:</label>
-    <input type="text" placeholder="Choose..." [formControl]="inputConfig">
+<div *ngIf="data$ | async as data; else nodata" class="container">
+  <h1>Step 2: Select you config and options</h1>
+  <div>
+    <label>Config:</label>
+    <select (change)="configSelected()" [(ngModel)]="selectedConfig" id="modelSelect">
+      <option [ngValue]="null" selected value>Choose...</option>
+      <option *ngFor="let config of data.configs" [ngValue]="config">
+        {{config.description}}
+      </option>
+    </select>
   </div>
-  <div class="row">
+  <div *ngIf="!!selectedConfig">
+    <p>Range: {{selectedConfig.range}} miles - Max speed: {{selectedConfig.speed}} - Cost: {{selectedConfig.price | currency: 'USD' }}</p>
+  </div>
+  <div>
     <label>Tow Hitch?</label>
-    <input type="checkbox" [formControl]="checkboxHitch">
+    <input (change)="towSelected()" [formControl]="checkboxTow" id="includeTow" type="checkbox">
   </div>
-  <div class="row">
+  <div>
     <label>Yoke Steering Wheel?</label>
-    <input type="checkbox" [formControl]="checkboxWheel">
+    <input (change)="wheelSelected()" [formControl]="checkboxWheel" id="includeYoke" type="checkbox">
   </div>
 </div>
+<app-display-car-image></app-display-car-image>
+<ng-template #nodata>No data to show.</ng-template>
+

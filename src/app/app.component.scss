@@ -1,5 +1,6 @@
 .main {
   --nav-bg-color: #2a2929;
+
   .content {
     nav {
       display: flex;
@@ -10,15 +11,14 @@
         color: white;
         flex-grow: 1;
         text-align: center;
+        border: 1px solid var(--nav-bg-color);
 
         &:hover {
           opacity: 0.6;
           transition: 0.3s;
           background: var(--nav-bg-color);
         }
-        &:visited {
-          dislpay: block;
-        }
+
         &.active {
           background: var(--nav-bg-color);
         }
