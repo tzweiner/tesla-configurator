@@ -5,6 +5,7 @@ import { EMPTY, Observable, ReplaySubject } from 'rxjs';
 import { Config, OptionsModel } from '../models/options-model.model';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { SelectionsModel } from '../models/selections.model';
+import { AppSettings } from '../app-settings';
 
 export const optionsResolver: (
   route: ActivatedRouteSnapshot,
@@ -17,7 +18,6 @@ export class DataService {
   private selectionsSubject: ReplaySubject<SelectionsModel> =
     new ReplaySubject<SelectionsModel>();
   public selections$ = this.selectionsSubject.asObservable();
-  private imagesUrl = 'https://interstate21.com/tesla-app/images/';
   private selections: SelectionsModel = {};
 
   constructor(private http$: HttpClient) {}
@@ -36,7 +36,7 @@ export class DataService {
   }
 
   public getCarImage(): string {
-    return `${this.imagesUrl}/${this.selections?.model?.code}/${this.selections.color?.code}.jpg`;
+    return `${AppSettings.IMAGES_URL}/${this.selections?.model?.code}/${this.selections.color?.code}.jpg`;
   }
 
   public setModelAndColorSelection(model?: CarModel, color?: Color): void {

@@ -12,11 +12,11 @@
   </div>
   <div *ngIf="data.tow" class="container-flex">
     <div>Tow Hitch Package</div>
-    <div *ngIf="showTowPrice()">{{ 100000000 | currency: 'USD' }}</div>
+    <div *ngIf="showTowPrice()">{{ getTowPrice() | currency: 'USD' }}</div>
   </div>
   <div *ngIf="data.wheel" class="container-flex">
     <div>Yoke Steering Wheel Package</div>
-    <div *ngIf="showWheelPrice()">{{ 100000000 | currency: 'USD' }}</div>
+    <div *ngIf="showWheelPrice()">{{ getWheelPrice() | currency: 'USD' }}</div>
   </div>
   <hr />
   <div class="container-flex">

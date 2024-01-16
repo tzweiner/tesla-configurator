@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { SelectionsModel } from '../models/selections.model';
+import { AppSettings } from '../app-settings';
 
 @Component({
   selector: 'app-summary',
@@ -25,14 +26,27 @@ export class SummaryComponent implements OnInit {
   }
 
   public showTowPrice(): boolean {
-    return !!this.data.tow; // TODO
+    return !!this.data.tow;
   }
 
   public showWheelPrice(): boolean {
-    return !!this.data.wheel; // TODO
+    return !!this.data.wheel;
   }
 
   public getTotalCost(): number {
-    return (this.data.config?.price ?? 0) + (this.data.color?.price ?? 0);
+    return (
+      (this.data.config?.price ?? 0) +
+      (this.data.color?.price ?? 0) +
+      (this.showTowPrice() ? AppSettings.DEFAULT_TOWHITCH_PRICE : 0) +
+      (this.showWheelPrice() ? AppSettings.DEFAULT_WHEEL_PRICE : 0)
+    );
+  }
+
+  public getTowPrice(): number {
+    return AppSettings.DEFAULT_TOWHITCH_PRICE;
+  }
+
+  public getWheelPrice(): number {
+    return AppSettings.DEFAULT_WHEEL_PRICE;
   }
 }
