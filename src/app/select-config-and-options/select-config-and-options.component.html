@@ -10,14 +10,14 @@
     </select>
   </div>
   <div *ngIf="!!selectedConfig">
-    <p>Range: {{selectedConfig?.range}} miles - Max speed: {{selectedConfig?.speed}} - Cost: {{selectedConfig?.price | currency: 'USD' }}</p>
+    <p>Range: {{selectedConfig.range}} miles - Max speed: {{selectedConfig.speed}} - Cost: {{selectedConfig.price | currency: 'USD' }}</p>
   </div>
   <div *ngIf="data.towHitch">
-    <label>Tow Hitch?</label>
+    <label>Tow hitch?</label>
     <input (change)="towSelected()" [formControl]="checkboxTow" id="includeTow" type="checkbox">
   </div>
   <div *ngIf="data.yoke">
-    <label>Yoke Steering Wheel?</label>
+    <label>Yoke steering wheel?</label>
     <input (change)="wheelSelected()" [formControl]="checkboxWheel" id="includeYoke" type="checkbox">
   </div>
 </div>
