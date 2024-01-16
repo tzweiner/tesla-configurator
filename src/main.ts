@@ -8,7 +8,7 @@ platformBrowserDynamic()
   .catch((err) => console.error(err));
 
 const handlers = [
-  http.get('/options/:modelCode', ({ params }) => {
+  http.get('/options/:id', ({ params }) => {
     const options = {
       S: {
         configs: [
@@ -133,7 +133,7 @@ const handlers = [
       },
     };
     // @ts-ignore
-    return HttpResponse.json(options[params.modelCode.toUpperCase()]);
+    return HttpResponse.json(options[params.id.toUpperCase()]);
   }),
   http.get('/models', ({ request, params, cookies }) => {
     return HttpResponse.json([

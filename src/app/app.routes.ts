@@ -19,7 +19,7 @@ export const routes: Routes = [
     resolve: { selection: optionsResolver },
   },
   {
-    path: 'summary/:modelCode',
+    path: 'summary',
     component: SummaryComponent,
     canActivate: [configGuard],
   },

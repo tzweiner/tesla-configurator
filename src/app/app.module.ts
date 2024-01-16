@@ -10,7 +10,6 @@ import { SelectConfigAndOptionsComponent } from './select-config-and-options/sel
 import { SummaryComponent } from './summary/summary.component';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
-import { OrderByPipe } from './order-by.pipe';
 import { DisplayCarImageComponent } from './display-car-image/display-car-image.component';
 
 @NgModule({
@@ -29,7 +28,6 @@ import { DisplayCarImageComponent } from './display-car-image/display-car-image.
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    OrderByPipe,
   ],
   bootstrap: [AppComponent],
   providers: [DataService],

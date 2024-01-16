@@ -8,15 +8,18 @@
   <p>Range: {{data.config?.range}} miles - Max speed: {{data.config?.speed}}</p>
   <div class="container-flex">
     <div>{{data.color?.description}} Color</div>
-    <div *ngIf="showColorPrice()">{{ calculateColorPrice() | currency: 'USD' }}</div>
+    <div *ngIf="calculateColorPrice(); else zeroprice">{{ calculateColorPrice() | currency: 'USD' }}</div>
+    <ng-template #zeroprice>
+      <div>{{calculateColorPrice() | currency: 'USD': 'symbol' : '1.0-0'  }}</div>
+    </ng-template>
   </div>
   <div *ngIf="data.tow" class="container-flex">
     <div>Tow Hitch Package</div>
-    <div *ngIf="showTowPrice()">{{ 100000000 | currency: 'USD' }}</div>
+    <div>{{ getTowPrice() | currency: 'USD' }}</div>
   </div>
   <div *ngIf="data.wheel" class="container-flex">
     <div>Yoke Steering Wheel Package</div>
-    <div *ngIf="showWheelPrice()">{{ 100000000 | currency: 'USD' }}</div>
+    <div>{{ getWheelPrice() | currency: 'USD' }}</div>
   </div>
   <hr />
   <div class="container-flex">

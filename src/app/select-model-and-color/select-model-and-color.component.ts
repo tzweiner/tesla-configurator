@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { CarModel, Color } from '../models/car-model.model';
 
 @Component({
@@ -12,12 +12,18 @@ export class SelectModelAndColorComponent implements OnInit {
   public models$: Observable<CarModel[]>;
   public colors: Color[] = [];
   public selectedModel: CarModel | null = null;
-  public selectedColor: Color;
+  public selectedColor: Color | null;
+  private models: CarModel[];
 
   constructor(private service: DataService) {}
 
   ngOnInit(): void {
-    this.models$ = this.service.getModels();
+    this.models$ = this.service.getModels().pipe(
+      tap((response) => {
+        this.models = response;
+        this.initForm();
+      }),
+    );
   }
 
   public modelSelected(): void {
@@ -28,6 +34,7 @@ export class SelectModelAndColorComponent implements OnInit {
     }
     this.colors = this.selectedModel?.colors || [];
     this.selectedColor = this.colors?.[0] ?? null;
+    this.service.clearCofigAndTowhitchAndWheelSelections();
     this.colorSelected();
   }
 
@@ -36,6 +43,22 @@ export class SelectModelAndColorComponent implements OnInit {
       this.selectedModel ?? undefined,
       this.selectedColor ?? undefined,
     );
+  }
+
+  private initForm(): void {
+    const currentSelections = this.service.getSelections();
+    if (currentSelections.model && this.models) {
+      this.selectedModel =
+        this.models.find(
+          (item) => item.code == currentSelections.model?.code,
+        ) || null;
+
+      this.colors = this.selectedModel?.colors || [];
+      this.selectedColor =
+        this.colors.find(
+          (item) => item.code == currentSelections.color?.code,
+        ) || null;
+    }
   }
 
   private compareModelDescriptions = (a: CarModel, b: CarModel) => {

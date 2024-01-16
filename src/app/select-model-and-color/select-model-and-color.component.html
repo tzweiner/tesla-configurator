@@ -11,14 +11,13 @@
       </select>
     </div>
     <div *ngIf="selectedModel && colors" class="col">
-      <label>Color:</label>{{selectedColor.code}}
+      <label>Color:</label>
       <select (change)="colorSelected()" [(ngModel)]="selectedColor" class="form-control" id="colorSelect">
         <option *ngFor="let color of colors" [ngValue]="color">
           {{color.description}}
         </option>
       </select>
-
-      <app-display-car-image></app-display-car-image>
     </div>
   </div>
 </div>
+<app-display-car-image></app-display-car-image>
