@@ -34,6 +34,7 @@ export class SelectModelAndColorComponent implements OnInit {
     }
     this.colors = this.selectedModel?.colors || [];
     this.selectedColor = this.colors?.[0] ?? null;
+    this.service.clearTowhitchAndWheelSelections();
     this.colorSelected();
   }
 

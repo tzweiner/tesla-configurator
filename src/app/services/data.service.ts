@@ -68,11 +68,6 @@ export class DataService {
     return this.selections;
   }
 
-  public clearSelections(): void {
-    this.selections = {};
-    this.triggerSelectionsSubjectEmit();
-  }
-
   public isModelColorPairSet(): boolean {
     return !!this.selections?.model && !!this.selections?.color;
   }
@@ -87,5 +82,19 @@ export class DataService {
 
   public triggerSelectionsSubjectEmit() {
     this.selectionsSubject.next(this.selections);
+  }
+
+  public clearSelections(): void {
+    this.selections = {};
+    this.triggerSelectionsSubjectEmit();
+  }
+
+  public clearTowhitchAndWheelSelections(): void {
+    if (this.selections?.tow) {
+      this.selections.tow = undefined;
+    }
+    if (this.selections?.wheel) {
+      this.selections.wheel = undefined;
+    }
   }
 }
