@@ -50,7 +50,7 @@ export class DataService {
       this.selections.color = color;
     }
 
-    this.selectionsSubject.next(this.selections);
+    this.triggerSelectionsSubjectEmit();
   }
 
   public setConfigTowWheelSelection(
@@ -61,7 +61,7 @@ export class DataService {
     this.selections.config = config;
     this.selections.tow = tow;
     this.selections.wheel = wheel;
-    this.selectionsSubject.next(this.selections);
+    this.triggerSelectionsSubjectEmit();
   }
 
   public getSelections(): SelectionsModel {
@@ -70,6 +70,7 @@ export class DataService {
 
   public clearSelections(): void {
     this.selections = {};
+    this.triggerSelectionsSubjectEmit();
   }
 
   public isModelColorPairSet(): boolean {

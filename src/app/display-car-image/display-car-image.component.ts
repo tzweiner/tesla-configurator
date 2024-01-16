@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { SelectionsModel } from '../models/selections.model';
 
 @Component({
@@ -15,10 +15,13 @@ export class DisplayCarImageComponent implements OnInit {
   constructor(private service: DataService) {}
 
   ngOnInit(): void {
-    this.data$ = this.service.selections$;
-    setTimeout(() => {
-      this.service.triggerSelectionsSubjectEmit();
-    }, 0);
+    this.data$ = this.service.selections$.pipe(
+      tap(() => {
+        this.getCarImage();
+        this.showImage();
+      }),
+    );
+    this.service.triggerSelectionsSubjectEmit();
   }
 
   public showImage(): boolean {
