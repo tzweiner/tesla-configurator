@@ -80,7 +80,7 @@ export class DataService {
     );
   }
 
-  public triggerSelectionsSubjectEmit() {
+  public triggerSelectionsSubjectEmit(): void {
     this.selectionsSubject.next(this.selections);
   }
 
