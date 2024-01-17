@@ -25,7 +25,6 @@ export class SelectConfigAndOptionsComponent implements OnInit {
   ngOnInit(): void {
     this.data$ = this.route.data.pipe(
       tap((response) => {
-        console.log('response', response['selection']);
         this.configs = response['selection'].configs;
         this.initForm();
       }),
