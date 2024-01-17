@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
 
-import { modelColorGuard } from './model-color.guard';
+import { modelAndColorGuard } from './model-color.guard';
 
-describe('modelColorGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => modelColorGuard(...guardParameters));
+describe('modelAndColorGuard', () => {
+  const executeGuard: CanActivateFn = (...guardParameters) =>
+    TestBed.runInInjectionContext(() => modelAndColorGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

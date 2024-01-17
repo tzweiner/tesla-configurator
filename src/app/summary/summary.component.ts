@@ -21,10 +21,6 @@ export class SummaryComponent implements OnInit {
     return this.data.color?.price ?? 0;
   }
 
-  public showColorPrice(): boolean {
-    return !!this.data.color?.price;
-  }
-
   public getTotalCost(): number {
     return (
       (this.data.config?.price ?? 0) +
