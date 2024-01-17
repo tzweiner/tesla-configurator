@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tesla-configurator": {
+      "hosting": {
+        "tesla-configurator": [
+          "tesla-configurator-tz1"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tesla-configurator"
+  }
+}
