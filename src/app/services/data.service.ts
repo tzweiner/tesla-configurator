@@ -1,16 +1,33 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CarModel, Color } from '../models/car-model.model';
-import { EMPTY, Observable, ReplaySubject } from 'rxjs';
+import { catchError, EMPTY, map, Observable, ReplaySubject } from 'rxjs';
 import { Config, OptionsModel } from '../models/options-model.model';
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { SelectionsModel } from '../models/selections.model';
 import { AppSettings } from '../app-settings';
 
 export const optionsResolver: (
   route: ActivatedRouteSnapshot,
-) => Observable<OptionsModel> = (route: ActivatedRouteSnapshot) => {
-  return inject(DataService).getOptions(route?.paramMap?.get('modelCode'));
+  router: Router,
+) => Observable<OptionsModel> = (
+  route: ActivatedRouteSnapshot,
+  router: Router,
+) => {
+  return inject(DataService)
+    .getOptions(route?.paramMap?.get('modelCode'))
+    .pipe(
+      map((response) => {
+        if (!('configs' in response)) {
+          router.navigate(['models']);
+        }
+        return response;
+      }),
+      catchError((error) => {
+        router.navigate(['models']);
+        return EMPTY;
+      }),
+    );
 };
 
 @Injectable()

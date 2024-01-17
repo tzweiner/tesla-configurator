@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Config, OptionsModel } from '../models/options-model.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 import { DataService } from '../services/data.service';
 
@@ -20,15 +20,23 @@ export class SelectConfigAndOptionsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: DataService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.data$ = this.route.data.pipe(
       tap((response) => {
-        this.configs = response['selection'].configs;
-        this.initForm();
+        if (response && response['selection']) {
+          this.configs = response['selection'].configs;
+          this.initForm();
+        }
       }),
-      map((response) => response['selection']),
+      map((response) => {
+        if (!response || !response['selection']) {
+          this.router.navigate(['models']);
+        }
+        return response['selection'];
+      }),
     );
   }
 
